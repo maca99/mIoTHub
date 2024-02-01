@@ -1,0 +1,5 @@
+node-red/data/.npm/*
+node-red/data/node_modules
+node-red/data/*.backup
+node-red-custom/data/*.backup
+node-red-custom/data/.npm/*
