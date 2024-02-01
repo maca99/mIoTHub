@@ -10,7 +10,9 @@
 version: "3.7"
 
 services:
+
   node-red:
+    container_name: mIoTHub-rednode
     image: nodered/node-red:latest
     environment:
       - TZ=Europe/Amsterdam
@@ -21,6 +23,20 @@ services:
         ipv4_address: 172.30.0.100
     volumes:
       - ./node-red/data:/data
+
+  mosquitto:
+    container_name: mIoTHub-mosquitto
+    image: eclipse-mosquitto
+    volumes:
+    - ./mosquitto/config:/mosquitto/config
+    - ./mosquitto/log:/mosquitto/log
+    - ./mosquitto/data/:/mosquitto/data
+    restart: always
+    networks:
+      hub-network:
+        ipv4_address: 172.30.0.101
+    ports:
+    - "1883:1883" 
 
 networks:
   hub-network:

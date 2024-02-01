@@ -426,5 +426,243 @@
                 "file": "/usr/src/node-red/node_modules/@node-red/nodes/core/storage/23-watch.js"
             }
         }
+    },
+    "node-red-contrib-alexa-remote2-applestrudel": {
+        "name": "node-red-contrib-alexa-remote2-applestrudel",
+        "version": "5.0.49",
+        "local": true,
+        "user": true,
+        "nodes": {
+            "alexa-remote-account": {
+                "name": "alexa-remote-account",
+                "types": [
+                    "alexa-remote-account"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-alexa-remote2-applestrudel",
+                "file": "/data/node_modules/node-red-contrib-alexa-remote2-applestrudel/nodes/alexa-remote-account.js"
+            },
+            "alexa-remote-init": {
+                "name": "alexa-remote-init",
+                "types": [
+                    "alexa-remote-init"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-alexa-remote2-applestrudel",
+                "file": "/data/node_modules/node-red-contrib-alexa-remote2-applestrudel/nodes/alexa-remote-init.js"
+            },
+            "alexa-remote-event": {
+                "name": "alexa-remote-event",
+                "types": [
+                    "alexa-remote-event"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-alexa-remote2-applestrudel",
+                "file": "/data/node_modules/node-red-contrib-alexa-remote2-applestrudel/nodes/alexa-remote-event.js"
+            },
+            "alexa-remote-smarthome": {
+                "name": "alexa-remote-smarthome",
+                "types": [
+                    "alexa-remote-smarthome"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-alexa-remote2-applestrudel",
+                "file": "/data/node_modules/node-red-contrib-alexa-remote2-applestrudel/nodes/alexa-remote-smarthome.js"
+            },
+            "alexa-remote-routine": {
+                "name": "alexa-remote-routine",
+                "types": [
+                    "alexa-remote-routine"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-alexa-remote2-applestrudel",
+                "file": "/data/node_modules/node-red-contrib-alexa-remote2-applestrudel/nodes/alexa-remote-routine.js"
+            },
+            "alexa-remote-echo": {
+                "name": "alexa-remote-echo",
+                "types": [
+                    "alexa-remote-echo"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-alexa-remote2-applestrudel",
+                "file": "/data/node_modules/node-red-contrib-alexa-remote2-applestrudel/nodes/alexa-remote-echo.js"
+            },
+            "alexa-remote-other": {
+                "name": "alexa-remote-other",
+                "types": [
+                    "alexa-remote-other"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-alexa-remote2-applestrudel",
+                "file": "/data/node_modules/node-red-contrib-alexa-remote2-applestrudel/nodes/alexa-remote-other.js"
+            },
+            "alexa-remote-list": {
+                "name": "alexa-remote-list",
+                "types": [
+                    "alexa-remote-list"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-alexa-remote2-applestrudel",
+                "file": "/data/node_modules/node-red-contrib-alexa-remote2-applestrudel/nodes/alexa-remote-list.js"
+            }
+        }
+    },
+    "node-red-contrib-xiaomi-smart-devices": {
+        "name": "node-red-contrib-xiaomi-smart-devices",
+        "version": "2.0.4",
+        "local": true,
+        "user": true,
+        "nodes": {
+            "xiaomi-gateway-config": {
+                "name": "xiaomi-gateway-config",
+                "types": [
+                    "xiaomi-gateway-config"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-xiaomi-smart-devices",
+                "file": "/data/node_modules/node-red-contrib-xiaomi-smart-devices/config/gateway-config.js"
+            },
+            "xiaomi-gateway": {
+                "name": "xiaomi-gateway",
+                "types": [
+                    "xiaomi-gateway"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-xiaomi-smart-devices",
+                "file": "/data/node_modules/node-red-contrib-xiaomi-smart-devices/devices/gateway/gateway.js"
+            },
+            "xiaomi-gateway-utils": {
+                "name": "xiaomi-gateway-utils",
+                "types": [
+                    "xiaomi-gateway-utils"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-xiaomi-smart-devices",
+                "file": "/data/node_modules/node-red-contrib-xiaomi-smart-devices/devices/gateway-utils/gateway-utils.js"
+            },
+            "xiaomi-human-body-sensor": {
+                "name": "xiaomi-human-body-sensor",
+                "types": [
+                    "xiaomi-human-body-sensor"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-xiaomi-smart-devices",
+                "file": "/data/node_modules/node-red-contrib-xiaomi-smart-devices/devices/human-body-sensor/human-body-sensor.js"
+            },
+            "xiaomi-temperature-humidity-sensor": {
+                "name": "xiaomi-temperature-humidity-sensor",
+                "types": [
+                    "xiaomi-temperature-humidity-sensor"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-xiaomi-smart-devices",
+                "file": "/data/node_modules/node-red-contrib-xiaomi-smart-devices/devices/temperature-humidity-sensor/temperature-humidity-sensor.js"
+            },
+            "xiaomi-magic-cube-controller": {
+                "name": "xiaomi-magic-cube-controller",
+                "types": [
+                    "xiaomi-magic-cube-controller"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-xiaomi-smart-devices",
+                "file": "/data/node_modules/node-red-contrib-xiaomi-smart-devices/devices/magic-cube-controller/magic-cube-controller.js"
+            },
+            "xiaomi-window-door-sensor": {
+                "name": "xiaomi-window-door-sensor",
+                "types": [
+                    "xiaomi-window-door-sensor"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-xiaomi-smart-devices",
+                "file": "/data/node_modules/node-red-contrib-xiaomi-smart-devices/devices/window-door-sensor/window-door-sensor.js"
+            },
+            "xiaomi-water-sensor": {
+                "name": "xiaomi-water-sensor",
+                "types": [
+                    "xiaomi-water-sensor"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-xiaomi-smart-devices",
+                "file": "/data/node_modules/node-red-contrib-xiaomi-smart-devices/devices/water-sensor/water-sensor.js"
+            },
+            "xiaomi-switch": {
+                "name": "xiaomi-switch",
+                "types": [
+                    "xiaomi-switch"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-xiaomi-smart-devices",
+                "file": "/data/node_modules/node-red-contrib-xiaomi-smart-devices/devices/switch/switch.js"
+            },
+            "xiaomi-wall-switch": {
+                "name": "xiaomi-wall-switch",
+                "types": [
+                    "xiaomi-wall-switch"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-xiaomi-smart-devices",
+                "file": "/data/node_modules/node-red-contrib-xiaomi-smart-devices/devices/wall-switch/wall-switch.js"
+            },
+            "xiaomi-smoke-detector": {
+                "name": "xiaomi-smoke-detector",
+                "types": [
+                    "xiaomi-smoke-detector",
+                    "xiaomi-smoke-detector"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-xiaomi-smart-devices",
+                "file": "/data/node_modules/node-red-contrib-xiaomi-smart-devices/devices/smoke-detector/smoke-detector.js"
+            },
+            "xiaomi-generic-device": {
+                "name": "xiaomi-generic-device",
+                "types": [
+                    "generic-device",
+                    "xiaomi-generic-device"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-xiaomi-smart-devices",
+                "file": "/data/node_modules/node-red-contrib-xiaomi-smart-devices/devices/generic-device/generic-device.js"
+            }
+        }
     }
 }

@@ -8,59 +8,65 @@
         "env": []
     },
     {
-        "id": "d9a6a9527f86fd92",
-        "type": "inject",
-        "z": "96e55a8f4e272af3",
+        "id": "1fda2b2ccb198049",
+        "type": "mqtt-broker",
         "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "ciao mondo",
-        "payloadType": "str",
-        "x": 150,
-        "y": 340,
-        "wires": [
-            [
-                "5d48d5155bdee5a0"
-            ]
-        ]
+        "broker": "172.30.0.101",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
     },
     {
-        "id": "5d48d5155bdee5a0",
-        "type": "function",
+        "id": "e7d5eeb1ec4bdbc8",
+        "type": "mqtt in",
         "z": "96e55a8f4e272af3",
-        "name": "hello world",
-        "func": "\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 350,
-        "y": 340,
+        "name": "sensor",
+        "topic": "sensor",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "1fda2b2ccb198049",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 220,
         "wires": [
             [
-                "cd082463ff3ba98e"
+                "b4717558cb4824e3"
             ]
+        ],
+        "outputLabels": [
+            "value"
         ]
     },
     {
-        "id": "cd082463ff3ba98e",
+        "id": "b4717558cb4824e3",
         "type": "debug",
         "z": "96e55a8f4e272af3",
-        "name": "debug 1",
+        "name": "msg.payload",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -69,8 +75,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 620,
-        "y": 340,
+        "x": 470,
+        "y": 220,
         "wires": []
     }
 ]
