@@ -39,43 +39,6 @@
         "sessionExpiry": ""
     },
     {
-        "id": "5d48d5155bdee5a0",
-        "type": "function",
-        "z": "96e55a8f4e272af3",
-        "name": "hello world",
-        "func": "",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "// Code added here will be run once\n// whenever the node is starter\nmsg.payload=\"ciao mondo\"\n\nreturn msg;",
-        "finalize": "",
-        "libs": [],
-        "x": 390,
-        "y": 220,
-        "wires": [
-            [
-                "cd082463ff3ba98e"
-            ]
-        ]
-    },
-    {
-        "id": "cd082463ff3ba98e",
-        "type": "debug",
-        "z": "96e55a8f4e272af3",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload.string",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 620,
-        "y": 340,
-        "wires": []
-    },
-    {
         "id": "e7d5eeb1ec4bdbc8",
         "type": "mqtt in",
         "z": "96e55a8f4e272af3",
@@ -88,15 +51,108 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 150,
+        "x": 170,
         "y": 220,
         "wires": [
             [
-                "5d48d5155bdee5a0"
+                "b4717558cb4824e3"
             ]
         ],
         "outputLabels": [
             "value"
+        ]
+    },
+    {
+        "id": "b4717558cb4824e3",
+        "type": "debug",
+        "z": "96e55a8f4e272af3",
+        "name": "msg.payload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 470,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "bd9695c0525b6b70",
+        "type": "http request",
+        "z": "96e55a8f4e272af3",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "body",
+        "url": "https://api.weatherapi.com/v1/current.json?q=Roma&key=2a1bf9e463f24539a99223657240302",
+        "tls": "",
+        "persist": true,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 450,
+        "y": 360,
+        "wires": [
+            [
+                "beff12abd6360286"
+            ]
+        ],
+        "outputLabels": [
+            "msg.payload"
+        ]
+    },
+    {
+        "id": "beff12abd6360286",
+        "type": "debug",
+        "z": "96e55a8f4e272af3",
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 360,
+        "wires": [],
+        "inputLabels": [
+            "msg.payload"
+        ]
+    },
+    {
+        "id": "861f3bc9fd9444c9",
+        "type": "inject",
+        "z": "96e55a8f4e272af3",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "rethgswyter",
+        "payload": "payload",
+        "payloadType": "msg",
+        "x": 130,
+        "y": 360,
+        "wires": [
+            [
+                "bd9695c0525b6b70"
+            ]
         ]
     }
 ]

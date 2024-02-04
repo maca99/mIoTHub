@@ -78,5 +78,81 @@
         "x": 470,
         "y": 220,
         "wires": []
+    },
+    {
+        "id": "bd9695c0525b6b70",
+        "type": "http request",
+        "z": "96e55a8f4e272af3",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "body",
+        "url": "https://api.weatherapi.com/v1/current.json?q=Roma&key=2a1bf9e463f24539a99223657240302",
+        "tls": "",
+        "persist": true,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 450,
+        "y": 360,
+        "wires": [
+            [
+                "beff12abd6360286"
+            ]
+        ],
+        "outputLabels": [
+            "msg.payload.body"
+        ]
+    },
+    {
+        "id": "beff12abd6360286",
+        "type": "debug",
+        "z": "96e55a8f4e272af3",
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 360,
+        "wires": [],
+        "inputLabels": [
+            "msg.payload"
+        ]
+    },
+    {
+        "id": "861f3bc9fd9444c9",
+        "type": "inject",
+        "z": "96e55a8f4e272af3",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "rethgswyter",
+        "payload": "payload",
+        "payloadType": "msg",
+        "x": 130,
+        "y": 360,
+        "wires": [
+            [
+                "bd9695c0525b6b70"
+            ]
+        ]
     }
 ]
