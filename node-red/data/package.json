@@ -6,6 +6,7 @@
     "dependencies": {
         "node-red-contrib-alexa-remote2-applestrudel": "~5.0.49",
         "node-red-contrib-credentials": "~0.2.3",
+        "node-red-contrib-influxdb": "~0.7.0",
         "node-red-contrib-xiaomi-ble": "~1.3.3",
         "node-red-contrib-xiaomi-smart-devices": "~2.0.4"
     }

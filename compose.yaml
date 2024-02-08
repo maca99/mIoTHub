@@ -42,15 +42,6 @@ services:
     ports:
     - "1883:1883" 
 
-  influxdb:
-    container_name: mIoTHub-influxdb
-    image: influxdb:2.7.4
-    ports:
-      - 8086:8086
-    networks:
-      hub-network:
-        ipv4_address: 172.30.0.102
-
 #  zigbee2mqtt:
 #    container_name: zigbee2mqtt
 #    image: koenkk/zigbee2mqtt:latest
@@ -58,6 +49,9 @@ services:
 #    volumes:
 #      - ./Zigbee2Mqtt:/app/data
 #      - ./Zigbee2Mqtt/run/udev:/run/udev:ro
+#    networks:
+#      hub-network:
+#        ipv4_address: 172.30.0.103
 #    ports:
       # Frontend port
 #      - 7070:7070
