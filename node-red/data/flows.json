@@ -8,6 +8,14 @@
         "env": []
     },
     {
+        "id": "9277445b8b04291e",
+        "type": "tab",
+        "label": "weather",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "1fda2b2ccb198049",
         "type": "mqtt-broker",
         "name": "",
@@ -39,6 +47,25 @@
         "sessionExpiry": ""
     },
     {
+        "id": "4b9321200a9b8931",
+        "type": "alexa-remote-account",
+        "name": "myAccount",
+        "authMethod": "password",
+        "proxyOwnIp": "",
+        "proxyPort": "3456",
+        "cookieFile": "./amazon",
+        "refreshInterval": "3",
+        "alexaServiceHost": "alexa.amazon.it",
+        "pushDispatchHost": "",
+        "amazonPage": "amazon.it",
+        "acceptLanguage": "it-IT",
+        "onKeywordInLanguage": "on",
+        "userAgent": "",
+        "usePushConnection": "on",
+        "autoInit": "on",
+        "autoQueryActivityOnTrigger": "off"
+    },
+    {
         "id": "e7d5eeb1ec4bdbc8",
         "type": "mqtt in",
         "z": "96e55a8f4e272af3",
@@ -52,10 +79,10 @@
         "rh": 0,
         "inputs": 0,
         "x": 170,
-        "y": 220,
+        "y": 180,
         "wires": [
             [
-                "b4717558cb4824e3"
+                "e1ba06091b9dfa57"
             ]
         ],
         "outputLabels": [
@@ -63,7 +90,7 @@
         ]
     },
     {
-        "id": "b4717558cb4824e3",
+        "id": "e1ba06091b9dfa57",
         "type": "debug",
         "z": "96e55a8f4e272af3",
         "name": "msg.payload",
@@ -76,58 +103,26 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 470,
-        "y": 220,
+        "y": 180,
         "wires": []
     },
     {
-        "id": "bd9695c0525b6b70",
-        "type": "http request",
+        "id": "87525fcd3c11dfae",
+        "type": "alexa-remote-init",
         "z": "96e55a8f4e272af3",
         "name": "",
-        "method": "GET",
-        "ret": "txt",
-        "paytoqs": "body",
-        "url": "https://api.weatherapi.com/v1/current.json?q=Roma&key=2a1bf9e463f24539a99223657240302",
-        "tls": "",
-        "persist": true,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 450,
-        "y": 360,
+        "account": "4b9321200a9b8931",
+        "option": "initialise",
+        "x": 440,
+        "y": 320,
         "wires": [
             [
-                "beff12abd6360286"
+                "9353f881f7e1b55a"
             ]
-        ],
-        "outputLabels": [
-            "msg.payload.body"
         ]
     },
     {
-        "id": "beff12abd6360286",
-        "type": "debug",
-        "z": "96e55a8f4e272af3",
-        "name": "debug 1",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 720,
-        "y": 360,
-        "wires": [],
-        "inputLabels": [
-            "msg.payload"
-        ]
-    },
-    {
-        "id": "861f3bc9fd9444c9",
+        "id": "513c90e0cb1148f2",
         "type": "inject",
         "z": "96e55a8f4e272af3",
         "name": "",
@@ -144,15 +139,149 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "topic": "rethgswyter",
-        "payload": "payload",
-        "payloadType": "msg",
-        "x": 130,
-        "y": 360,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 320,
+        "wires": [
+            [
+                "87525fcd3c11dfae"
+            ]
+        ]
+    },
+    {
+        "id": "9353f881f7e1b55a",
+        "type": "debug",
+        "z": "96e55a8f4e272af3",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "bd9695c0525b6b70",
+        "type": "http request",
+        "z": "9277445b8b04291e",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "https://api.weatherapi.com/v1/current.json?q=celano&key=2a1bf9e463f24539a99223657240302",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 430,
+        "y": 100,
+        "wires": [
+            [
+                "b4717558cb4824e3"
+            ]
+        ],
+        "outputLabels": [
+            "msg.payload"
+        ]
+    },
+    {
+        "id": "aceb37565443387c",
+        "type": "inject",
+        "z": "9277445b8b04291e",
+        "name": "inject",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 170,
+        "y": 100,
         "wires": [
             [
                 "bd9695c0525b6b70"
             ]
         ]
+    },
+    {
+        "id": "b4717558cb4824e3",
+        "type": "debug",
+        "z": "9277445b8b04291e",
+        "name": "msg.payload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "979c6c6ceca00454",
+        "type": "inject",
+        "z": "9277445b8b04291e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 260,
+        "wires": [
+            [
+                "22119d8e387d6824"
+            ]
+        ]
+    },
+    {
+        "id": "22119d8e387d6824",
+        "type": "debug",
+        "z": "9277445b8b04291e",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 260,
+        "wires": []
     }
 ]
