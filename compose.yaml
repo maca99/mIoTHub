@@ -11,6 +11,25 @@ version: "3.7"
 
 services:
 
+  db:
+    image: mysql
+    container_name: myIoTHub-mysql
+    command: --default-authentication-plugin=caching_sha2_password
+    restart: always
+    env_file:
+      - .env
+    ports:
+    - "3318:3318" 
+    volumes:
+    - ./mysql-dump:/docker-entrypoint-initdb.d
+
+  adminer:
+    image: adminer
+    container_name: se4iot-mysql-adminer
+    restart: always
+    ports:
+      - "8080:8080"
+
   node-red:
     container_name: mIoTHub-rednode
     build:
