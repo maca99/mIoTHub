@@ -23,7 +23,8 @@ USE `mydb` ;
 CREATE TABLE IF NOT EXISTS `mydb`.`external_temperatures` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `date` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `temperature` DECIMAL(2,1) NULL,
+  `temperature` DECIMAL(3,1) NULL,
+  `humidity` TINYINT UNSIGNED ,
   PRIMARY KEY (`ID`),
   UNIQUE INDEX `id_UNIQUE` (`ID` ASC) VISIBLE,
   UNIQUE INDEX `date_UNIQUE` (`date` ASC) VISIBLE)
@@ -36,7 +37,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `mydb`.`internal_temperatures` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `date` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `temperature` DECIMAL(2,1) NULL,
+  `temperature` DECIMAL(3,1) NULL,
+  `humidity` TINYINT UNSIGNED ,
   `room` VARCHAR(10) NULL,
   PRIMARY KEY (`ID`))
 ENGINE = InnoDB;

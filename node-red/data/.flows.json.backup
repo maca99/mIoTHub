@@ -20,10 +20,160 @@
         "type": "MySQLdatabase",
         "name": "",
         "host": "172.30.0.100",
-        "port": "3318",
+        "port": "3306",
         "db": "mydb",
         "tz": "",
         "charset": ""
+    },
+    {
+        "id": "09330d4a9aadc820",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "true",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "8ecd27c4c39f8117",
+        "type": "ui_tab",
+        "name": "Template",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "aec5af2c2cd18fa4",
+        "type": "ui_group",
+        "name": "style",
+        "tab": "8ecd27c4c39f8117",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "119e30429c6fe136",
+        "type": "alexa-remote-account",
+        "name": "",
+        "authMethod": "proxy",
+        "proxyOwnIp": "172.30.0.101",
+        "proxyPort": "3456",
+        "cookieFile": "",
+        "refreshInterval": "3",
+        "alexaServiceHost": "alexa.amazon.it",
+        "pushDispatchHost": "",
+        "amazonPage": "amazon.it",
+        "acceptLanguage": "it-IT",
+        "onKeywordInLanguage": "on",
+        "userAgent": "",
+        "usePushConnection": "on",
+        "autoInit": "on",
+        "autoQueryActivityOnTrigger": "off"
+    },
+    {
+        "id": "b4ec5e3dd6da204a",
+        "type": "alexa-remote-init",
+        "z": "96e55a8f4e272af3",
+        "name": "",
+        "account": "119e30429c6fe136",
+        "option": "initialise",
+        "x": 220,
+        "y": 240,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "bd9695c0525b6b70",
@@ -45,7 +195,6 @@
         "y": 120,
         "wires": [
             [
-                "b4717558cb4824e3",
                 "24c2f76b105490f2"
             ]
         ],
@@ -67,14 +216,14 @@
                 "vt": "str"
             }
         ],
-        "repeat": "",
+        "repeat": "3600",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 110,
+        "x": 130,
         "y": 120,
         "wires": [
             [
@@ -95,53 +244,96 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 630,
-        "y": 160,
+        "x": 1170,
+        "y": 240,
         "wires": []
     },
     {
-        "id": "979c6c6ceca00454",
-        "type": "inject",
+        "id": "aa785a2387531020",
+        "type": "mysql",
         "z": "9277445b8b04291e",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "MYSQLUSERNAME",
-        "payloadType": "env",
-        "x": 190,
-        "y": 260,
+        "mydb": "6a407f545c7dab10",
+        "name": "mydb",
+        "x": 1150,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "026190a39ee06c59",
+        "type": "function",
+        "z": "9277445b8b04291e",
+        "name": "store_weather_data",
+        "func": "var temperature = msg.payload.current.temp_c\nvar humidity = msg.payload.current.humidity\nvar query = \"INSERT INTO external_temperatures(temperature,humidity) VALUES (\"+ temperature +\",\"+ humidity +\")\"\n\nmsg.topic = query;\nmsg.payload =[temperature,humidity];\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 80,
         "wires": [
             [
-                "22119d8e387d6824"
+                "b4717558cb4824e3",
+                "aa785a2387531020"
             ]
         ]
     },
     {
-        "id": "22119d8e387d6824",
-        "type": "debug",
+        "id": "0666aade4992673c",
+        "type": "mysql",
         "z": "9277445b8b04291e",
-        "name": "debug 2",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 660,
-        "y": 260,
+        "mydb": "6a407f545c7dab10",
+        "name": "",
+        "x": 730,
+        "y": 420,
+        "wires": [
+            [
+                "8e8049cc4da83632"
+            ]
+        ]
+    },
+    {
+        "id": "084de9fab81673ee",
+        "type": "function",
+        "z": "9277445b8b04291e",
+        "name": "show_weather_data",
+        "func": "var query = \"SELECT * FROM external_temperatures ORDER BY date DESC LIMIT 1\";\nmsg.topic=query\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 420,
+        "wires": [
+            [
+                "0666aade4992673c"
+            ]
+        ]
+    },
+    {
+        "id": "a6e232e2e8b8f611",
+        "type": "ui_text",
+        "z": "9277445b8b04291e",
+        "group": "aec5af2c2cd18fa4",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "weather",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1480,
+        "y": 420,
         "wires": []
     },
     {
@@ -150,26 +342,85 @@
         "z": "9277445b8b04291e",
         "name": "",
         "property": "payload",
-        "action": "",
+        "action": "obj",
         "pretty": false,
         "x": 550,
         "y": 80,
         "wires": [
             [
-                "aa785a2387531020"
+                "026190a39ee06c59"
             ]
         ]
     },
     {
-        "id": "aa785a2387531020",
-        "type": "mysql",
+        "id": "7f5395fc6ca58d1e",
+        "type": "ui_template",
         "z": "9277445b8b04291e",
-        "mydb": "6a407f545c7dab10",
-        "name": "mydb",
-        "x": 770,
-        "y": 80,
+        "group": "aec5af2c2cd18fa4",
+        "name": "",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "format": "<style>\n    /* Stile generale della dashboard */\n    .body {\n    font-family: Arial, sans-serif;\n    background-color: #f2f2f2;\n    margin: 0;\n    }\n\n    .container {\n    max-width: 800px;\n    margin: 20px auto;\n    }\n\n    /* Stile del blocco della temperatura */\n    .temperature-block {\n    background-color: #fff;\n    border: 1px solid #ddd;\n    border-radius: 5px;\n    padding: 15px;\n    margin-bottom: 20px;\n    }\n\n    /* Stile del titolo della temperatura */\n    .temperature-title {\n    font-size: 18px;\n    font-weight: bold;\n    color: #333;\n    }\n\n    /* Stile del valore della temperatura */\n    .temperature-value {\n    font-size: 24px;\n    color: #4CAF50;\n    }\n\n    /* Stile dell'unità di misura della temperatura */\n    .temperature-unit {\n    font-size: 16px;\n    color: #555;\n    }\n</style>\n\n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 1220,
+        "y": 420,
         "wires": [
-            []
+            [
+                "a6e232e2e8b8f611"
+            ]
+        ]
+    },
+    {
+        "id": "8e8049cc4da83632",
+        "type": "function",
+        "z": "9277445b8b04291e",
+        "name": "function 1",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 960,
+        "y": 420,
+        "wires": [
+            [
+                "7f5395fc6ca58d1e"
+            ]
+        ]
+    },
+    {
+        "id": "ac8688e4d9666a29",
+        "type": "ui_button",
+        "z": "9277445b8b04291e",
+        "name": "",
+        "group": "aec5af2c2cd18fa4",
+        "order": 2,
+        "width": "2",
+        "height": "1",
+        "passthru": false,
+        "label": "refresh",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 180,
+        "y": 420,
+        "wires": [
+            [
+                "084de9fab81673ee"
+            ]
         ]
     }
 ]
