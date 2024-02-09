@@ -557,4 +557,5 @@ module.exports = {
     //    *   - reason: if result is false, the HTTP reason string to return
     //    */
     //},
+    mysqlReconnectTime: 30000,
 }

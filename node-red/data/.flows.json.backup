@@ -16,155 +16,14 @@
         "env": []
     },
     {
-        "id": "1fda2b2ccb198049",
-        "type": "mqtt-broker",
+        "id": "6a407f545c7dab10",
+        "type": "MySQLdatabase",
         "name": "",
-        "broker": "172.30.0.101",
-        "port": "1883",
-        "clientid": "",
-        "autoConnect": true,
-        "usetls": false,
-        "protocolVersion": "4",
-        "keepalive": "60",
-        "cleansession": true,
-        "autoUnsubscribe": true,
-        "birthTopic": "",
-        "birthQos": "0",
-        "birthRetain": "false",
-        "birthPayload": "",
-        "birthMsg": {},
-        "closeTopic": "",
-        "closeQos": "0",
-        "closeRetain": "false",
-        "closePayload": "",
-        "closeMsg": {},
-        "willTopic": "",
-        "willQos": "0",
-        "willRetain": "false",
-        "willPayload": "",
-        "willMsg": {},
-        "userProps": "",
-        "sessionExpiry": ""
-    },
-    {
-        "id": "4b9321200a9b8931",
-        "type": "alexa-remote-account",
-        "name": "myAccount",
-        "authMethod": "password",
-        "proxyOwnIp": "",
-        "proxyPort": "3456",
-        "cookieFile": "./amazon",
-        "refreshInterval": "3",
-        "alexaServiceHost": "alexa.amazon.it",
-        "pushDispatchHost": "",
-        "amazonPage": "amazon.it",
-        "acceptLanguage": "it-IT",
-        "onKeywordInLanguage": "on",
-        "userAgent": "",
-        "usePushConnection": "on",
-        "autoInit": "on",
-        "autoQueryActivityOnTrigger": "off"
-    },
-    {
-        "id": "e7d5eeb1ec4bdbc8",
-        "type": "mqtt in",
-        "z": "96e55a8f4e272af3",
-        "name": "sensor",
-        "topic": "sensor",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "1fda2b2ccb198049",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 170,
-        "y": 180,
-        "wires": [
-            [
-                "e1ba06091b9dfa57"
-            ]
-        ],
-        "outputLabels": [
-            "value"
-        ]
-    },
-    {
-        "id": "e1ba06091b9dfa57",
-        "type": "debug",
-        "z": "96e55a8f4e272af3",
-        "name": "msg.payload",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 470,
-        "y": 180,
-        "wires": []
-    },
-    {
-        "id": "87525fcd3c11dfae",
-        "type": "alexa-remote-init",
-        "z": "96e55a8f4e272af3",
-        "name": "",
-        "account": "4b9321200a9b8931",
-        "option": "initialise",
-        "x": 440,
-        "y": 320,
-        "wires": [
-            [
-                "9353f881f7e1b55a"
-            ]
-        ]
-    },
-    {
-        "id": "513c90e0cb1148f2",
-        "type": "inject",
-        "z": "96e55a8f4e272af3",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 160,
-        "y": 320,
-        "wires": [
-            [
-                "87525fcd3c11dfae"
-            ]
-        ]
-    },
-    {
-        "id": "9353f881f7e1b55a",
-        "type": "debug",
-        "z": "96e55a8f4e272af3",
-        "name": "debug 3",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 720,
-        "y": 320,
-        "wires": []
+        "host": "172.30.0.100",
+        "port": "3318",
+        "db": "mydb",
+        "tz": "",
+        "charset": ""
     },
     {
         "id": "bd9695c0525b6b70",
@@ -182,11 +41,12 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 430,
-        "y": 100,
+        "x": 330,
+        "y": 120,
         "wires": [
             [
-                "b4717558cb4824e3"
+                "b4717558cb4824e3",
+                "24c2f76b105490f2"
             ]
         ],
         "outputLabels": [
@@ -214,8 +74,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 170,
-        "y": 100,
+        "x": 110,
+        "y": 120,
         "wires": [
             [
                 "bd9695c0525b6b70"
@@ -235,8 +95,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 670,
-        "y": 100,
+        "x": 630,
+        "y": 160,
         "wires": []
     },
     {
@@ -258,9 +118,9 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 180,
+        "payload": "MYSQLUSERNAME",
+        "payloadType": "env",
+        "x": 190,
         "y": 260,
         "wires": [
             [
@@ -283,5 +143,33 @@
         "x": 660,
         "y": 260,
         "wires": []
+    },
+    {
+        "id": "24c2f76b105490f2",
+        "type": "json",
+        "z": "9277445b8b04291e",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 550,
+        "y": 80,
+        "wires": [
+            [
+                "aa785a2387531020"
+            ]
+        ]
+    },
+    {
+        "id": "aa785a2387531020",
+        "type": "mysql",
+        "z": "9277445b8b04291e",
+        "mydb": "6a407f545c7dab10",
+        "name": "mydb",
+        "x": 770,
+        "y": 80,
+        "wires": [
+            []
+        ]
     }
 ]
