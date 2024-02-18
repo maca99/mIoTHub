@@ -163,17 +163,35 @@
         "autoQueryActivityOnTrigger": "off"
     },
     {
-        "id": "b4ec5e3dd6da204a",
-        "type": "alexa-remote-init",
-        "z": "96e55a8f4e272af3",
-        "name": "",
-        "account": "119e30429c6fe136",
-        "option": "initialise",
-        "x": 220,
-        "y": 240,
-        "wires": [
-            []
-        ]
+        "id": "e78bdce391db9ff9",
+        "type": "mqtt-broker",
+        "name": "mIoTHub-mosquitto",
+        "broker": "host.docker.internal",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
     },
     {
         "id": "bd9695c0525b6b70",
@@ -287,8 +305,8 @@
         "z": "9277445b8b04291e",
         "mydb": "6a407f545c7dab10",
         "name": "",
-        "x": 730,
-        "y": 420,
+        "x": 710,
+        "y": 820,
         "wires": [
             [
                 "8e8049cc4da83632"
@@ -308,7 +326,7 @@
         "finalize": "",
         "libs": [],
         "x": 460,
-        "y": 420,
+        "y": 820,
         "wires": [
             [
                 "0666aade4992673c"
@@ -332,8 +350,8 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1480,
-        "y": 420,
+        "x": 1500,
+        "y": 820,
         "wires": []
     },
     {
@@ -367,8 +385,8 @@
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 1220,
-        "y": 420,
+        "x": 1240,
+        "y": 820,
         "wires": [
             [
                 "a6e232e2e8b8f611"
@@ -388,7 +406,7 @@
         "finalize": "",
         "libs": [],
         "x": 960,
-        "y": 420,
+        "y": 820,
         "wires": [
             [
                 "7f5395fc6ca58d1e"
@@ -416,11 +434,49 @@
         "topic": "topic",
         "topicType": "msg",
         "x": 180,
-        "y": 420,
+        "y": 820,
         "wires": [
             [
                 "084de9fab81673ee"
             ]
         ]
+    },
+    {
+        "id": "0e95615dfc6f56cd",
+        "type": "mqtt in",
+        "z": "9277445b8b04291e",
+        "name": "temperature",
+        "topic": "sensor/temperature",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "e78bdce391db9ff9",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 300,
+        "wires": [
+            [
+                "8d883a67bc15e147"
+            ]
+        ]
+    },
+    {
+        "id": "8d883a67bc15e147",
+        "type": "debug",
+        "z": "9277445b8b04291e",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 440,
+        "y": 300,
+        "wires": []
     }
 ]
