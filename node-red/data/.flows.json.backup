@@ -10,7 +10,7 @@
     {
         "id": "9277445b8b04291e",
         "type": "tab",
-        "label": "weather",
+        "label": "main",
         "disabled": false,
         "info": "",
         "env": []
@@ -135,13 +135,13 @@
     {
         "id": "aec5af2c2cd18fa4",
         "type": "ui_group",
-        "name": "style",
+        "name": "Dashboard ",
         "tab": "8ecd27c4c39f8117",
         "order": 1,
         "disp": true,
-        "width": "6",
+        "width": "13",
         "collapse": false,
-        "className": ""
+        "className": "<style>     /* Stile generale della dashboard */     .body {     font-family: Arial, sans-serif;     background-color: #f2f2f2;     margin: 0;     }      .container {     max-width: 800px;     margin: 20px auto;     }      /* Stile del blocco della temperatura */     .temperature-block {     background-color: #fff;     border: 1px solid #ddd;     border-radius: 5px;     padding: 15px;     margin-bottom: 20px;     }      /* Stile del titolo della temperatura */     .temperature-title {     font-size: 18px;     font-weight: bold;     color: #333;     }      /* Stile del valore della temperatura */     .temperature-value {     font-size: 24px;     color: #4CAF50;     }  </style>"
     },
     {
         "id": "119e30429c6fe136",
@@ -194,6 +194,15 @@
         "sessionExpiry": ""
     },
     {
+        "id": "fb202f2b9c4ea98f",
+        "type": "ui_tab",
+        "name": "Table",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
         "id": "bd9695c0525b6b70",
         "type": "http request",
         "z": "9277445b8b04291e",
@@ -209,7 +218,7 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 330,
+        "x": 390,
         "y": 120,
         "wires": [
             [
@@ -234,14 +243,14 @@
                 "vt": "str"
             }
         ],
-        "repeat": "3600",
+        "repeat": "60",
         "crontab": "",
-        "once": false,
+        "once": true,
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 130,
+        "x": 170,
         "y": 120,
         "wires": [
             [
@@ -262,8 +271,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1170,
-        "y": 240,
+        "x": 1310,
+        "y": 140,
         "wires": []
     },
     {
@@ -294,7 +303,6 @@
         "y": 80,
         "wires": [
             [
-                "b4717558cb4824e3",
                 "aa785a2387531020"
             ]
         ]
@@ -305,11 +313,11 @@
         "z": "9277445b8b04291e",
         "mydb": "6a407f545c7dab10",
         "name": "",
-        "x": 710,
-        "y": 820,
+        "x": 690,
+        "y": 720,
         "wires": [
             [
-                "8e8049cc4da83632"
+                "66cc76d2ac924a77"
             ]
         ]
     },
@@ -317,16 +325,16 @@
         "id": "084de9fab81673ee",
         "type": "function",
         "z": "9277445b8b04291e",
-        "name": "show_weather_data",
-        "func": "var query = \"SELECT * FROM external_temperatures ORDER BY date DESC LIMIT 1\";\nmsg.topic=query\nreturn msg;",
+        "name": "show_saved_data",
+        "func": "var query = \"SELECT * FROM internal_temperatures ORDER BY date DESC LIMIT 1\";\nmsg.topic=query\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 460,
-        "y": 820,
+        "x": 450,
+        "y": 720,
         "wires": [
             [
                 "0666aade4992673c"
@@ -339,20 +347,21 @@
         "z": "9277445b8b04291e",
         "group": "aec5af2c2cd18fa4",
         "order": 0,
-        "width": 0,
-        "height": 0,
+        "width": "5",
+        "height": "3",
         "name": "",
-        "label": "weather",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
+        "label": "",
+        "format": "{{message.payload}}",
+        "layout": "row-left",
         "className": "",
         "style": false,
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1500,
-        "y": 820,
-        "wires": []
+        "x": 1570,
+        "y": 620,
+        "wires": [],
+        "info": "<div style=\"text-align:center;\">\r\n    <h2>Dati Sensori</h2>\r\n    <p>ID: {{msg.payload.ID}}</p>\r\n    <p>Data: {{msg.payload.date}}</p>\r\n    <p>Temperatura: {{msg.payload.temperature}} °C</p>\r\n    <p>Umidità: {{msg.payload.humidity}} %</p>\r\n</div>\r\n"
     },
     {
         "id": "24c2f76b105490f2",
@@ -362,11 +371,12 @@
         "property": "payload",
         "action": "obj",
         "pretty": false,
-        "x": 550,
+        "x": 610,
         "y": 80,
         "wires": [
             [
-                "026190a39ee06c59"
+                "026190a39ee06c59",
+                "b62e580275962299"
             ]
         ]
     },
@@ -379,37 +389,17 @@
         "order": 1,
         "width": 0,
         "height": 0,
-        "format": "<style>\n    /* Stile generale della dashboard */\n    .body {\n    font-family: Arial, sans-serif;\n    background-color: #f2f2f2;\n    margin: 0;\n    }\n\n    .container {\n    max-width: 800px;\n    margin: 20px auto;\n    }\n\n    /* Stile del blocco della temperatura */\n    .temperature-block {\n    background-color: #fff;\n    border: 1px solid #ddd;\n    border-radius: 5px;\n    padding: 15px;\n    margin-bottom: 20px;\n    }\n\n    /* Stile del titolo della temperatura */\n    .temperature-title {\n    font-size: 18px;\n    font-weight: bold;\n    color: #333;\n    }\n\n    /* Stile del valore della temperatura */\n    .temperature-value {\n    font-size: 24px;\n    color: #4CAF50;\n    }\n\n    /* Stile dell'unità di misura della temperatura */\n    .temperature-unit {\n    font-size: 16px;\n    color: #555;\n    }\n</style>\n\n",
+        "format": "\n<div class=temperature-block\">\n    <h2>Dati Esterno</h2>\n    <p><b>Data:</b> {{msg.payload.date}}</p>\n    <p><b>Temperatura: </b> {{msg.payload.temperature}} °C</p>\n    <p><b>Umidità:</b> {{msg.payload.humidity}} %</p>\n</div>\n",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 1240,
-        "y": 820,
+        "x": 1300,
+        "y": 620,
         "wires": [
             [
                 "a6e232e2e8b8f611"
-            ]
-        ]
-    },
-    {
-        "id": "8e8049cc4da83632",
-        "type": "function",
-        "z": "9277445b8b04291e",
-        "name": "function 1",
-        "func": "\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 960,
-        "y": 820,
-        "wires": [
-            [
-                "7f5395fc6ca58d1e"
             ]
         ]
     },
@@ -423,7 +413,7 @@
         "width": "2",
         "height": "1",
         "passthru": false,
-        "label": "refresh",
+        "label": "Aggiorna",
         "tooltip": "",
         "color": "",
         "bgcolor": "",
@@ -433,8 +423,8 @@
         "payloadType": "str",
         "topic": "topic",
         "topicType": "msg",
-        "x": 180,
-        "y": 820,
+        "x": 160,
+        "y": 720,
         "wires": [
             [
                 "084de9fab81673ee"
@@ -448,7 +438,7 @@
         "name": "temperature",
         "topic": "sensor/temperature",
         "qos": "2",
-        "datatype": "buffer",
+        "datatype": "auto-detect",
         "broker": "e78bdce391db9ff9",
         "nl": false,
         "rap": true,
@@ -458,7 +448,9 @@
         "y": 300,
         "wires": [
             [
-                "8d883a67bc15e147"
+                "7cd7502b73a6fdd2",
+                "19f68dc37e382fed",
+                "5cbacbe7811f2724"
             ]
         ]
     },
@@ -475,8 +467,247 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 440,
-        "y": 300,
+        "x": 720,
+        "y": 240,
         "wires": []
+    },
+    {
+        "id": "7cd7502b73a6fdd2",
+        "type": "function",
+        "z": "9277445b8b04291e",
+        "name": "store_sensor_temperature",
+        "func": "var temperature = msg.payload.temperature\nvar humidity = msg.payload.humidity\nvar query = \"INSERT INTO internal_temperatures(temperature,humidity) VALUES (\"+ temperature +\",\"+ humidity +\")\"\n\nmsg.topic = query;\nmsg.payload =[temperature,humidity];\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 300,
+        "wires": [
+            [
+                "8d883a67bc15e147",
+                "58852aba4f849b19"
+            ]
+        ]
+    },
+    {
+        "id": "58852aba4f849b19",
+        "type": "mysql",
+        "z": "9277445b8b04291e",
+        "mydb": "6a407f545c7dab10",
+        "name": "mydb",
+        "x": 850,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8736bfb8126a57ad",
+        "type": "debug",
+        "z": "9277445b8b04291e",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.temperature",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1300,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "ec255d89370c3ff8",
+        "type": "ui_gauge",
+        "z": "9277445b8b04291e",
+        "name": "",
+        "group": "aec5af2c2cd18fa4",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperatura Interna",
+        "label": "celsius",
+        "format": "{{value}} c°",
+        "min": "15",
+        "max": "30",
+        "colors": [
+            "#ca3838",
+            "#00b500",
+            "#ca3838"
+        ],
+        "seg1": "18",
+        "seg2": "22",
+        "diff": false,
+        "className": "",
+        "x": 860,
+        "y": 380,
+        "wires": [],
+        "inputLabels": [
+            "msg.payload.tempearature"
+        ]
+    },
+    {
+        "id": "66cc76d2ac924a77",
+        "type": "change",
+        "z": "9277445b8b04291e",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0]",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 880,
+        "y": 720,
+        "wires": [
+            [
+                "70744fb231dbe615"
+            ]
+        ]
+    },
+    {
+        "id": "70744fb231dbe615",
+        "type": "json",
+        "z": "9277445b8b04291e",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 1070,
+        "y": 720,
+        "wires": [
+            [
+                "8736bfb8126a57ad",
+                "7f5395fc6ca58d1e"
+            ]
+        ]
+    },
+    {
+        "id": "19f68dc37e382fed",
+        "type": "function",
+        "z": "9277445b8b04291e",
+        "name": "only_temperature",
+        "func": "msg.payload=msg.payload.temperature\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 380,
+        "wires": [
+            [
+                "ec255d89370c3ff8"
+            ]
+        ]
+    },
+    {
+        "id": "5cbacbe7811f2724",
+        "type": "function",
+        "z": "9277445b8b04291e",
+        "name": "only_humidity",
+        "func": "msg.payload=msg.payload.humidity\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 460,
+        "wires": [
+            [
+                "928dd37bd92ec803"
+            ]
+        ]
+    },
+    {
+        "id": "928dd37bd92ec803",
+        "type": "ui_gauge",
+        "z": "9277445b8b04291e",
+        "name": "",
+        "group": "aec5af2c2cd18fa4",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Umidità Interna",
+        "label": "percentuale",
+        "format": "{{value}} %",
+        "min": "0",
+        "max": "100",
+        "colors": [
+            "#ca3838",
+            "#00b500",
+            "#ca3838"
+        ],
+        "seg1": "40",
+        "seg2": "60",
+        "diff": false,
+        "className": "",
+        "x": 840,
+        "y": 460,
+        "wires": [],
+        "inputLabels": [
+            "msg.payload.tempearature"
+        ]
+    },
+    {
+        "id": "b62e580275962299",
+        "type": "function",
+        "z": "9277445b8b04291e",
+        "name": "weather",
+        "func": "msg.payload=msg.payload.current.condition\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 140,
+        "wires": [
+            [
+                "583999d279078dca"
+            ]
+        ]
+    },
+    {
+        "id": "583999d279078dca",
+        "type": "ui_template",
+        "z": "9277445b8b04291e",
+        "group": "aec5af2c2cd18fa4",
+        "name": "",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "format": "\n<div class=temperature-block\">\n    <img src=\"{{msg.payload.icon}}\" alt=\"meteo\">\n    <p><b>Tempo: </b> {{msg.payload.text}} </p>\n</div>\n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 1040,
+        "y": 140,
+        "wires": [
+            [
+                "b4717558cb4824e3"
+            ]
+        ]
     }
 ]

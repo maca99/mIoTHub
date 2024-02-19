@@ -30,7 +30,7 @@ mqttc.connect("Localhost")
 mqttc.loop_start()
 while True:
     temp = str(random.randint(16,28));
-    hum = str(random.randint(0,100));
+    hum = str(random.randint(20,80));
     data = {
         "temperature": temp,
         "humidity": hum
