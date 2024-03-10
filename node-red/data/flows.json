@@ -144,25 +144,6 @@
         "className": "<style>     /* Stile generale della dashboard */     .body {     font-family: Arial, sans-serif;     background-color: #f2f2f2;     margin: 0;     }      .container {     max-width: 800px;     margin: 20px auto;     }      /* Stile del blocco della temperatura */     .temperature-block {     background-color: #fff;     border: 1px solid #ddd;     border-radius: 5px;     padding: 15px;     margin-bottom: 20px;     }      /* Stile del titolo della temperatura */     .temperature-title {     font-size: 18px;     font-weight: bold;     color: #333;     }      /* Stile del valore della temperatura */     .temperature-value {     font-size: 24px;     color: #4CAF50;     }  </style>"
     },
     {
-        "id": "119e30429c6fe136",
-        "type": "alexa-remote-account",
-        "name": "",
-        "authMethod": "proxy",
-        "proxyOwnIp": "localhost",
-        "proxyPort": "3456",
-        "cookieFile": "",
-        "refreshInterval": "3",
-        "alexaServiceHost": "alexa.amazon.it",
-        "pushDispatchHost": "",
-        "amazonPage": "amazon.it",
-        "acceptLanguage": "it-IT",
-        "onKeywordInLanguage": "on",
-        "userAgent": "",
-        "usePushConnection": "on",
-        "autoInit": "on",
-        "autoQueryActivityOnTrigger": "off"
-    },
-    {
         "id": "e78bdce391db9ff9",
         "type": "mqtt-broker",
         "name": "mIoTHub-mosquitto",
@@ -201,6 +182,31 @@
         "order": 1,
         "disabled": false,
         "hidden": false
+    },
+    {
+        "id": "516a4340f4b51307",
+        "type": "telegram bot",
+        "botname": "IotHub",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "300",
+        "usesocks": false,
+        "sockshost": "",
+        "socksprotocol": "socks5",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
     },
     {
         "id": "bd9695c0525b6b70",
@@ -708,6 +714,69 @@
             [
                 "b4717558cb4824e3"
             ]
+        ]
+    },
+    {
+        "id": "1a94c80300b52681",
+        "type": "function",
+        "z": "9277445b8b04291e",
+        "name": "function 1",
+        "func": "var message = msg.payload;\nmsg.payload = {}\nmsg.payload.chatId = 687822250\nmsg.payload.type = 'message'\nmsg.payload.content = 'Ciao da XXXXBOT!';\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 860,
+        "wires": [
+            [
+                "361d925d6dce8ffe"
+            ]
+        ]
+    },
+    {
+        "id": "908f01e70debe71d",
+        "type": "inject",
+        "z": "9277445b8b04291e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 860,
+        "wires": [
+            [
+                "1a94c80300b52681"
+            ]
+        ]
+    },
+    {
+        "id": "361d925d6dce8ffe",
+        "type": "telegram sender",
+        "z": "9277445b8b04291e",
+        "name": "",
+        "bot": "516a4340f4b51307",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 990,
+        "y": 860,
+        "wires": [
+            []
         ]
     }
 ]

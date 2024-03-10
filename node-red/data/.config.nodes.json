@@ -449,7 +449,7 @@
                 "types": [
                     "alexa-remote-init"
                 ],
-                "enabled": true,
+                "enabled": false,
                 "local": true,
                 "user": false,
                 "module": "node-red-contrib-alexa-remote2-applestrudel",
@@ -460,7 +460,7 @@
                 "types": [
                     "alexa-remote-event"
                 ],
-                "enabled": true,
+                "enabled": false,
                 "local": true,
                 "user": false,
                 "module": "node-red-contrib-alexa-remote2-applestrudel",
@@ -471,7 +471,7 @@
                 "types": [
                     "alexa-remote-smarthome"
                 ],
-                "enabled": true,
+                "enabled": false,
                 "local": true,
                 "user": false,
                 "module": "node-red-contrib-alexa-remote2-applestrudel",
@@ -482,7 +482,7 @@
                 "types": [
                     "alexa-remote-routine"
                 ],
-                "enabled": true,
+                "enabled": false,
                 "local": true,
                 "user": false,
                 "module": "node-red-contrib-alexa-remote2-applestrudel",
@@ -493,7 +493,7 @@
                 "types": [
                     "alexa-remote-echo"
                 ],
-                "enabled": true,
+                "enabled": false,
                 "local": true,
                 "user": false,
                 "module": "node-red-contrib-alexa-remote2-applestrudel",
@@ -504,7 +504,7 @@
                 "types": [
                     "alexa-remote-other"
                 ],
-                "enabled": true,
+                "enabled": false,
                 "local": true,
                 "user": false,
                 "module": "node-red-contrib-alexa-remote2-applestrudel",
@@ -515,7 +515,7 @@
                 "types": [
                     "alexa-remote-list"
                 ],
-                "enabled": true,
+                "enabled": false,
                 "local": true,
                 "user": false,
                 "module": "node-red-contrib-alexa-remote2-applestrudel",
@@ -959,6 +959,31 @@
                 "user": false,
                 "module": "node-red-dashboard",
                 "file": "/usr/src/node-red/node_modules/node-red-dashboard/nodes/ui_spacer.js"
+            }
+        }
+    },
+    "node-red-contrib-telegrambot": {
+        "name": "node-red-contrib-telegrambot",
+        "version": "15.1.9",
+        "local": true,
+        "user": true,
+        "nodes": {
+            "telegrambot": {
+                "name": "telegrambot",
+                "types": [
+                    "telegram bot",
+                    "telegram receiver",
+                    "telegram command",
+                    "telegram event",
+                    "telegram sender",
+                    "telegram reply",
+                    "telegram control"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-telegrambot",
+                "file": "/data/node_modules/node-red-contrib-telegrambot/telegrambot/99-telegrambot.js"
             }
         }
     }
