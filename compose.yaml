@@ -16,8 +16,8 @@ services:
     container_name: mIoTHub-mysql
     command: --default-authentication-plugin=caching_sha2_password
     restart: always
-    environment:
-      - MYSQL_ROOT_PASSWORD=P@ssword
+    env_file:
+      - .env
     ports:
     - "3318:3318" 
     volumes:
@@ -41,10 +41,8 @@ services:
       context: ./node-red/
       dockerfile: Dockerfile
     image: nodered/node-red:latest
-    environment:
-      - TZ=Europe/Amsterdam
-      - MYSQLUSERNAME=root
-      - MYSQLPASSWORD=P@ssword
+    env_file:
+      - .env
     ports:
       - "1880:1880"
     networks:
@@ -67,24 +65,47 @@ services:
     ports:
     - "1883:1883" 
 
-#  zigbee2mqtt:
-#    container_name: zigbee2mqtt
-#    image: koenkk/zigbee2mqtt:latest
-   # restart: unless-stopped
+  influxdb:
+    container_name: mIoTHub-influxdb
+    image: influxdb:2.7.4
+    env_file:
+      - .env
+    volumes:
+    - ./influxdb/data:/var/lib/influxdb2:rw
+    ports:
+       - 8086:8086
+    networks:
+       hub-network:
+         ipv4_address: 172.30.0.103
+
+#  telegraf:
+#    restart: always
+#    container_name: mIoTHub-telegraf
+#    image: telegraf:latest
+#    env_file:
+#      - .env
 #    volumes:
-#      - ./Zigbee2Mqtt:/app/data
-#      - ./Zigbee2Mqtt/run/udev:/run/udev:ro
+#      - $PWD/telegraf/mqtt_client.conf:/etc/telegraf/telegraf.conf:ro
+#    depends_on:
+#      - influxdb
 #    networks:
 #      hub-network:
-#        ipv4_address: 172.30.0.103
-#    ports:
-      # Frontend port
-#      - 7070:7070
-#    environment:
-#      - TZ=Europe/Berlin
-    #devices: pennetta zigbee
-      # Make sure this matched your adapter location
-      #- /dev/serial/by-id/usb-Texas_Instruments_TI_CC2531_USB_CDC___0X00124B0018ED3DDF-if00:/dev/ttyACM0
+#        ipv4_address: 172.30.0.104
+
+  grafana:
+    restart: always
+    image: grafana/grafana-oss:latest
+    container_name: mIoTHub-grafana
+    volumes:
+      - ./grafana/data:/var/lib/grafana:rw
+    depends_on:
+      - influxdb
+    ports:
+      - 3000:3000
+    networks:
+      hub-network:
+        ipv4_address: 172.30.0.106
+
 
 networks:
   hub-network:
