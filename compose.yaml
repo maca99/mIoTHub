@@ -24,7 +24,7 @@ services:
     - ./mysql-dump:/docker-entrypoint-initdb.d
     networks:
       hub-network:
-        ipv4_address: 172.30.0.100
+        ipv4_address: 172.30.0.109
   adminer:
     image: adminer
     container_name: mIoTHub-mysql-adminer
@@ -61,7 +61,7 @@ services:
     restart: always
     networks:
       hub-network:
-        ipv4_address: 172.30.0.102
+        ipv4_address: 172.30.0.107
     ports:
     - "1883:1883" 
 
@@ -78,19 +78,19 @@ services:
        hub-network:
          ipv4_address: 172.30.0.103
 
-#  telegraf:
-#    restart: always
-#    container_name: mIoTHub-telegraf
-#    image: telegraf:latest
-#    env_file:
-#      - .env
-#    volumes:
-#      - $PWD/telegraf/mqtt_client.conf:/etc/telegraf/telegraf.conf:ro
-#    depends_on:
-#      - influxdb
-#    networks:
-#      hub-network:
-#        ipv4_address: 172.30.0.104
+  telegraf:
+    restart: always
+    container_name: mIoTHub-telegraf
+    image: telegraf:latest
+    env_file:
+      - .env
+    volumes:
+      - ./telegraf/mqtt.conf:/etc/telegraf/telegraf.conf:ro
+    depends_on:
+      - influxdb
+    networks:
+      hub-network:
+        ipv4_address: 172.30.0.104
 
   grafana:
     restart: always
@@ -106,10 +106,19 @@ services:
       hub-network:
         ipv4_address: 172.30.0.106
 
+  sensor-hub:
+    build: 
+      context: ./service
+      dockerfile: ./Dockerfile
+    networks:
+      hub-network:
+        ipv4_address: 172.30.0.108
+    depends_on:
+      - mosquitto
 
 networks:
   hub-network:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.30.0.0/16
+        - subnet: 172.30.0.0/24
