@@ -92,13 +92,15 @@ services:
       hub-network:
         ipv4_address: 172.30.0.104
 
-  grafana:
-    restart: always
+  hub-grafana:
     image: grafana/grafana-oss:latest
     container_name: mIoTHub-grafana
+    restart: always
+    env_file:
+      - .env
     volumes:
       - ./grafana/data:/var/lib/grafana:rw
-    depends_on:
+    links:
       - influxdb
     ports:
       - 3000:3000
