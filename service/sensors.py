@@ -17,17 +17,34 @@ sensors = config['data_generation']['sensors'].split('|')
 
 mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
 mqtt_client.connect(client_address, port=port)
+
+#define variable
+standard_devation_temperature = 6
+standard_devation_humidity = 10
+standard_devation_air = 50
+mean_temperature = 30
+mean_humidity = 30
+mean_air = 200
+
 # Function to publish area data to MQTT broker
 def publish_area_data(mqtt_client, sensors, room):
     while True:
         # Generate random sensor data
         for sensor in sensors:
             if sensor == 'temperature':
-                data = round(random.uniform(0, 40), 2)
+                data = round(random.gauss(mean_temperature,standard_devation_temperature),2)
             elif sensor == 'humidity':
-                data = round(random.uniform(0, 90), 2)
+                temp = random.gauss(mean_humidity,standard_devation_humidity)
+                temp = max(0, min(100, temp))  # Limit the value between 0 and 100
+                data = round(temp,2)
             elif sensor == 'air_quality':
-                data = random.randint(0, 500)
+                data = int(random.gauss(mean_air,standard_devation_air))
+            elif sensor == 'smoke':
+                if(random.random() > 0.01):
+                    data = 0
+                else:
+                    data = 1
+                
             #mqtt_client.publish(topic, payload=str(data))
             topic = f"rooms/room_{room}/{sensor}"
             mqtt_client.publish(topic, f'{{"{sensor}":{data}}}')
