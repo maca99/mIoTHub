@@ -214,77 +214,21 @@
         "hostname": "http://172.30.0.103",
         "port": "8086",
         "protocol": "http",
-        "database": "$INFLUX_INITIAL_BUCKET",
-        "name": "room-stats",
+        "database": "$I{INFLUX_INITIAL_BUCKET}",
+        "name": "influx",
         "usetls": false,
         "tls": "",
-        "influxdbVersion": "1.x",
-        "url": "http://localhost:8086",
+        "influxdbVersion": "2.0",
+        "url": "http://172.30.0.103:8086",
         "timeout": "10",
-        "rejectUnauthorized": true
-    },
-    {
-        "id": "82ea1734bf3a0f6e",
-        "type": "influxdb in",
-        "z": "96e55a8f4e272af3",
-        "influxdb": "755e2381bfb7263c",
-        "name": "query",
-        "query": "from(bucket: \"iot_bucket\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_field\"] == \"humidity\")\n  |> filter(fn: (r) => r[\"topic\"] == \"rooms/room_1/light_intensity\" or r[\"topic\"] == \"rooms/room_0/light_intensity\")\n  |> filter(fn: (r) => r[\"_measurement\"] == \"mqtt_consumer\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"mean\")",
-        "rawOutput": false,
-        "precision": "",
-        "retentionPolicy": "",
-        "org": "organisation",
-        "x": 530,
-        "y": 180,
-        "wires": [
-            [
-                "2af0b6c89e7efcfd"
-            ]
-        ]
-    },
-    {
-        "id": "2af0b6c89e7efcfd",
-        "type": "debug",
-        "z": "96e55a8f4e272af3",
-        "name": "debug 3",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 900,
-        "y": 180,
-        "wires": []
-    },
-    {
-        "id": "c81c85dc57b8f4bf",
-        "type": "mqtt in",
-        "z": "96e55a8f4e272af3",
-        "name": "temperatures",
-        "topic": "rooms/+/temperature",
-        "qos": "2",
-        "datatype": "json",
-        "broker": "e78bdce391db9ff9",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 290,
-        "y": 340,
-        "wires": [
-            [
-                "cc5a18f1f44388ac"
-            ]
-        ]
+        "rejectUnauthorized": false
     },
     {
         "id": "cc5a18f1f44388ac",
         "type": "function",
         "z": "96e55a8f4e272af3",
         "name": "temperature-alert",
-        "func": "if(msg.payload.temperature > 40){\n    return msg;\n}\n",
+        "func": "if(msg.payload.temperature > 100){\n    return msg;\n}\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -292,52 +236,10 @@
         "finalize": "",
         "libs": [],
         "x": 610,
-        "y": 340,
+        "y": 480,
         "wires": [
             [
                 "1272349ffe4b0fa2"
-            ]
-        ]
-    },
-    {
-        "id": "a23775c78d2599be",
-        "type": "mqtt in",
-        "z": "96e55a8f4e272af3",
-        "name": "humidity",
-        "topic": "rooms/+/humidity",
-        "qos": "2",
-        "datatype": "json",
-        "broker": "e78bdce391db9ff9",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 280,
-        "y": 460,
-        "wires": [
-            [
-                "11a14ccbece2125d"
-            ]
-        ]
-    },
-    {
-        "id": "4fad1baa3eedcd9b",
-        "type": "mqtt in",
-        "z": "96e55a8f4e272af3",
-        "name": "air",
-        "topic": "rooms/+/air_quality",
-        "qos": "2",
-        "datatype": "json",
-        "broker": "e78bdce391db9ff9",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 270,
-        "y": 580,
-        "wires": [
-            [
-                "3b7ceacd7102e0c6"
             ]
         ]
     },
@@ -346,7 +248,7 @@
         "type": "function",
         "z": "96e55a8f4e272af3",
         "name": "humidity-alert",
-        "func": "if(msg.payload.humidity > 90){\n    return msg;\n}\n",
+        "func": "if(msg.payload.humidity > 100){\n    return msg;\n}\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -354,7 +256,7 @@
         "finalize": "",
         "libs": [],
         "x": 600,
-        "y": 460,
+        "y": 540,
         "wires": [
             [
                 "9a37a2f74a9b6569"
@@ -366,7 +268,7 @@
         "type": "function",
         "z": "96e55a8f4e272af3",
         "name": "airquality-alert",
-        "func": "if(msg.payload.air_quality < 100){\n  return msg;  \n}\n",
+        "func": "if(msg.payload.air_quality < 0){\n  return msg;  \n}\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -374,7 +276,7 @@
         "finalize": "",
         "libs": [],
         "x": 600,
-        "y": 580,
+        "y": 600,
         "wires": [
             [
                 "3f46a381194d213c"
@@ -386,7 +288,7 @@
         "type": "trigger",
         "z": "96e55a8f4e272af3",
         "name": "",
-        "op1": "Allarme fumo",
+        "op1": "Allarme incendio",
         "op2": "0",
         "op1type": "str",
         "op2type": "str",
@@ -399,31 +301,10 @@
         "topic": "topic",
         "outputs": 1,
         "x": 600,
-        "y": 700,
+        "y": 680,
         "wires": [
             [
-                "6c3a13b5d8191a15"
-            ]
-        ]
-    },
-    {
-        "id": "24e05473d544dad3",
-        "type": "mqtt in",
-        "z": "96e55a8f4e272af3",
-        "name": "smoke",
-        "topic": "rooms/+/smoke",
-        "qos": "2",
-        "datatype": "json",
-        "broker": "e78bdce391db9ff9",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 270,
-        "y": 700,
-        "wires": [
-            [
-                "106008f03f7f899a"
+                "e6719a29819a115b"
             ]
         ]
     },
@@ -439,8 +320,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 940,
-        "y": 340,
+        "x": 980,
+        "y": 480,
         "wires": [
             [
                 "4bd0ae30306399d4"
@@ -451,14 +332,16 @@
         "id": "4bd0ae30306399d4",
         "type": "telegram sender",
         "z": "96e55a8f4e272af3",
-        "name": "",
+        "name": "telegram",
         "bot": "516a4340f4b51307",
         "haserroroutput": false,
         "outputs": 1,
-        "x": 1410,
-        "y": 460,
+        "x": 1380,
+        "y": 580,
         "wires": [
-            []
+            [
+                "cfeea5595d494f54"
+            ]
         ]
     },
     {
@@ -473,8 +356,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 950,
-        "y": 460,
+        "x": 970,
+        "y": 540,
         "wires": [
             [
                 "4bd0ae30306399d4"
@@ -493,8 +376,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 930,
-        "y": 580,
+        "x": 950,
+        "y": 600,
         "wires": [
             [
                 "4bd0ae30306399d4"
@@ -513,10 +396,235 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 930,
-        "y": 700,
+        "x": 950,
+        "y": 680,
+        "wires": [
+            [
+                "4bd0ae30306399d4"
+            ]
+        ]
+    },
+    {
+        "id": "4565e90f107e049a",
+        "type": "mqtt in",
+        "z": "96e55a8f4e272af3",
+        "name": "temperatures",
+        "topic": "home/#",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "e78bdce391db9ff9",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 270,
+        "y": 580,
+        "wires": [
+            [
+                "cc5a18f1f44388ac",
+                "11a14ccbece2125d",
+                "3b7ceacd7102e0c6",
+                "106008f03f7f899a"
+            ]
+        ]
+    },
+    {
+        "id": "e6719a29819a115b",
+        "type": "function",
+        "z": "96e55a8f4e272af3",
+        "name": "log-incendi",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 820,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "82e5099c71b0b5e9",
+        "type": "telegram command",
+        "z": "96e55a8f4e272af3",
+        "name": "status",
+        "command": "/report",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "516a4340f4b51307",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 330,
+        "y": 1020,
+        "wires": [
+            [
+                "a24b87d1168a0124"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "a24b87d1168a0124",
+        "type": "function",
+        "z": "96e55a8f4e272af3",
+        "name": "choice_button",
+        "func": "var opts = {\n    reply_markup: JSON.stringify({\n        \"inline_keyboard\": [[\n            {\n                \"text\": \"Temperature\",\n                \"callback_data\": 1\n            },\n            {\n                \"text\": \"Humidity\",\n                \"callback_data\": 2\n            },\n            {\n                \"text\": \"Air Quality\",\n                \"callback_data\": 3\n            }]\n        ]\n    })\n};\n\nmsg.error = false;\nmsg.payload.content = \"Seleziona un parametro\";\nmsg.payload.options = opts;\nmsg.payload.chatId = 687822250\nmsg.payload.type = \"message\";\n\nreturn [msg];",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 1020,
+        "wires": [
+            [
+                "be740a2eee8a768d"
+            ]
+        ]
+    },
+    {
+        "id": "249b0b3f64a136cb",
+        "type": "function",
+        "z": "96e55a8f4e272af3",
+        "name": "message_status",
+        "func": "msg.callback = msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 1140,
+        "wires": [
+            [
+                "963fc9bba5323539"
+            ]
+        ]
+    },
+    {
+        "id": "be740a2eee8a768d",
+        "type": "telegram sender",
+        "z": "96e55a8f4e272af3",
+        "name": "",
+        "bot": "516a4340f4b51307",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1110,
+        "y": 1020,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6f64c8cbe1d57002",
+        "type": "telegram event",
+        "z": "96e55a8f4e272af3",
+        "name": "response",
+        "bot": "516a4340f4b51307",
+        "event": "callback_query",
+        "autoanswer": false,
+        "x": 340,
+        "y": 1140,
+        "wires": [
+            [
+                "249b0b3f64a136cb"
+            ]
+        ]
+    },
+    {
+        "id": "c7102c16cce6831f",
+        "type": "function",
+        "z": "96e55a8f4e272af3",
+        "name": "function 1",
+        "func": "if (msg.callback.content == 1){\n    msg.payload.content = msg.payload.air_quality\n}\nif (msg.callback.content == 2) {\n    msg.payload.content = msg.payload.air_quality\n}\nif (msg.callback.content == 3) {\n    msg.payload.content = msg.payload.air_quality\n}\n\n\nmsg.payload.type = 'message'\nmsg.payload.chatId = 687822250\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1500,
+        "y": 1140,
+        "wires": [
+            [
+                "b146182c90275490"
+            ]
+        ]
+    },
+    {
+        "id": "22ef5763a1475cbe",
+        "type": "telegram sender",
+        "z": "96e55a8f4e272af3",
+        "name": "",
+        "bot": "516a4340f4b51307",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1810,
+        "y": 920,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b146182c90275490",
+        "type": "debug",
+        "z": "96e55a8f4e272af3",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2000,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "cfeea5595d494f54",
+        "type": "debug",
+        "z": "96e55a8f4e272af3",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1760,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "963fc9bba5323539",
+        "type": "influxdb in",
+        "z": "96e55a8f4e272af3",
+        "influxdb": "755e2381bfb7263c",
+        "name": "",
+        "query": "from(bucket: \"iot_bucket\")\n  |> range(start: -10m) // Inizio range 10 minuti fa\n  |> filter(fn: (r) => r[\"_measurement\"] == \"mqtt_consumer\" and r[\"_field\"] == \"temperature\" and r[\"topic\"] == \"home/room_0/temperature\")\n  |> aggregateWindow(every: 10s, fn: median)\n  |> last()\n  |> yield(name: \"last_value\")\n",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "${INFLUX_ORG}",
+        "x": 1170,
+        "y": 1160,
+        "wires": [
+            [
+                "c7102c16cce6831f"
+            ]
         ]
     },
     {
@@ -571,7 +679,8 @@
         "y": 120,
         "wires": [
             [
-                "bd9695c0525b6b70"
+                "bd9695c0525b6b70",
+                "eb99ddf2ca4fe46a"
             ]
         ]
     },
@@ -598,7 +707,7 @@
         "z": "9277445b8b04291e",
         "mydb": "6a407f545c7dab10",
         "name": "mydb",
-        "x": 1150,
+        "x": 1130,
         "y": 80,
         "wires": [
             []
@@ -629,8 +738,8 @@
         "type": "mysql",
         "z": "9277445b8b04291e",
         "mydb": "6a407f545c7dab10",
-        "name": "",
-        "x": 690,
+        "name": "database",
+        "x": 680,
         "y": 720,
         "wires": [
             [
@@ -643,7 +752,7 @@
         "type": "function",
         "z": "9277445b8b04291e",
         "name": "show_saved_data",
-        "func": "var query = \"SELECT * FROM internal_temperatures ORDER BY date DESC LIMIT 1\";\nmsg.topic=query\nreturn msg;",
+        "func": "var query = \"SELECT * FROM external_temperatures ORDER BY date DESC LIMIT 1\";\nmsg.topic = query\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -712,8 +821,8 @@
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 1300,
-        "y": 620,
+        "x": 1280,
+        "y": 700,
         "wires": [
             [
                 "a6e232e2e8b8f611"
@@ -721,39 +830,11 @@
         ]
     },
     {
-        "id": "ac8688e4d9666a29",
-        "type": "ui_button",
-        "z": "9277445b8b04291e",
-        "name": "",
-        "group": "aec5af2c2cd18fa4",
-        "order": 2,
-        "width": "2",
-        "height": "1",
-        "passthru": false,
-        "label": "Aggiorna",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "className": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "topic",
-        "topicType": "msg",
-        "x": 160,
-        "y": 720,
-        "wires": [
-            [
-                "084de9fab81673ee"
-            ]
-        ]
-    },
-    {
         "id": "0e95615dfc6f56cd",
         "type": "mqtt in",
         "z": "9277445b8b04291e",
-        "name": "temperature",
-        "topic": "sensor/rooms/#",
+        "name": "Dati_sensore",
+        "topic": "home/#",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "e78bdce391db9ff9",
@@ -762,10 +843,9 @@
         "rh": 0,
         "inputs": 0,
         "x": 170,
-        "y": 300,
+        "y": 420,
         "wires": [
             [
-                "7cd7502b73a6fdd2",
                 "19f68dc37e382fed",
                 "5cbacbe7811f2724"
             ]
@@ -784,41 +864,9 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 720,
-        "y": 240,
+        "x": 520,
+        "y": 860,
         "wires": []
-    },
-    {
-        "id": "7cd7502b73a6fdd2",
-        "type": "function",
-        "z": "9277445b8b04291e",
-        "name": "store_sensor_temperature",
-        "func": "var temperature = msg.payload.temperature\nvar humidity = msg.payload.humidity\nvar query = \"INSERT INTO internal_temperatures(temperature,humidity) VALUES (\"+ temperature +\",\"+ humidity +\")\"\n\nmsg.topic = query;\nmsg.payload =[temperature,humidity];\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 480,
-        "y": 300,
-        "wires": [
-            [
-                "8d883a67bc15e147"
-            ]
-        ]
-    },
-    {
-        "id": "58852aba4f849b19",
-        "type": "mysql",
-        "z": "9277445b8b04291e",
-        "mydb": "6a407f545c7dab10",
-        "name": "mydb",
-        "x": 790,
-        "y": 300,
-        "wires": [
-            []
-        ]
     },
     {
         "id": "8736bfb8126a57ad",
@@ -847,7 +895,7 @@
         "width": 0,
         "height": 0,
         "gtype": "gage",
-        "title": "Temperatura Interna",
+        "title": "Temperatura media Interno",
         "label": "celsius",
         "format": "{{value}} c°",
         "min": "15",
@@ -861,7 +909,7 @@
         "seg2": "22",
         "diff": false,
         "className": "",
-        "x": 860,
+        "x": 880,
         "y": 380,
         "wires": [],
         "inputLabels": [
@@ -879,7 +927,8 @@
                 "p": "payload",
                 "pt": "msg",
                 "to": "payload[0]",
-                "tot": "msg"
+                "tot": "msg",
+                "dc": true
             }
         ],
         "action": "",
@@ -887,28 +936,12 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 880,
+        "x": 900,
         "y": 720,
         "wires": [
             [
-                "70744fb231dbe615"
-            ]
-        ]
-    },
-    {
-        "id": "70744fb231dbe615",
-        "type": "json",
-        "z": "9277445b8b04291e",
-        "name": "",
-        "property": "payload",
-        "action": "obj",
-        "pretty": false,
-        "x": 1070,
-        "y": 720,
-        "wires": [
-            [
-                "8736bfb8126a57ad",
-                "7f5395fc6ca58d1e"
+                "7f5395fc6ca58d1e",
+                "8736bfb8126a57ad"
             ]
         ]
     },
@@ -962,7 +995,7 @@
         "width": 0,
         "height": 0,
         "gtype": "gage",
-        "title": "Umidità Interna",
+        "title": "Umidità media interna",
         "label": "percentuale",
         "format": "{{value}} %",
         "min": "0",
@@ -976,7 +1009,7 @@
         "seg2": "60",
         "diff": false,
         "className": "",
-        "x": 840,
+        "x": 860,
         "y": 460,
         "wires": [],
         "inputLabels": [
@@ -1012,7 +1045,7 @@
         "order": 1,
         "width": 0,
         "height": 0,
-        "format": "\n<div class=temperature-block\">\n    <img src=\"{{msg.payload.icon}}\" alt=\"meteo\">\n    <p><b>Tempo: </b> {{msg.payload.text}} </p>\n</div>\n",
+        "format": "<div class=temperature-block\">\n    <img src=\"{{msg.payload.icon}}\" alt=\"meteo\">\n    <p><b>Tempo: </b> {{msg.payload.text}} </p>\n</div>\n",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
@@ -1042,47 +1075,93 @@
         ],
         "repeat": "",
         "crontab": "",
-        "once": false,
+        "once": true,
         "onceDelay": 0.1,
+        "topic": "",
+        "payload": "INFLUX_USER",
+        "payloadType": "env",
+        "x": 290,
+        "y": 860,
+        "wires": [
+            [
+                "8d883a67bc15e147"
+            ]
+        ]
+    },
+    {
+        "id": "be231caa65932fe6",
+        "type": "inject",
+        "z": "9277445b8b04291e",
+        "name": "inject",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "3600",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 280,
-        "y": 860,
+        "x": 190,
+        "y": 740,
         "wires": [
-            []
+            [
+                "084de9fab81673ee"
+            ]
         ]
     },
     {
-        "id": "361d925d6dce8ffe",
-        "type": "telegram sender",
+        "id": "46e8f148cd4dac7e",
+        "type": "ui_button",
         "z": "9277445b8b04291e",
         "name": "",
-        "bot": "516a4340f4b51307",
-        "haserroroutput": false,
-        "outputs": 1,
-        "x": 990,
-        "y": 860,
+        "group": "aec5af2c2cd18fa4",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "button",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 190,
+        "y": 660,
         "wires": [
-            []
+            [
+                "084de9fab81673ee"
+            ]
         ]
     },
     {
-        "id": "1a94c80300b52681",
-        "type": "function",
+        "id": "eb99ddf2ca4fe46a",
+        "type": "influxdb in",
         "z": "9277445b8b04291e",
-        "name": "function 1",
-        "func": "var message = msg.payload;\nmsg.payload = {}\nmsg.payload.chatId = 687822250\nmsg.payload.type = 'message'\nmsg.payload.content = '';\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 560,
-        "y": 860,
+        "influxdb": "755e2381bfb7263c",
+        "name": "",
+        "query": "from(bucket: \"iot_bucket\")\n  |> range(start:-5m)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"mqtt_consumer\")\n  |> filter(fn: (r) => r[\"_field\"] == \"temperature\")\n  |> filter(fn: (r) => r[\"topic\"] == \"home/room_0/temperature\")\n  |> aggregateWindow(every: 10m, fn: median, createEmpty: false)\n  |> yield(name: \"median\")",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "${INFLUX_ORG}",
+        "x": 450,
+        "y": 240,
         "wires": [
-            []
+            [
+                "b4717558cb4824e3"
+            ]
         ]
     }
 ]
