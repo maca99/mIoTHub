@@ -19,8 +19,8 @@ mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
 mqtt_client.connect(client_address, port=port)
 
 #define variables
-standard_devation_temperature = 6
-standard_devation_humidity = 10
+standard_devation_temperature = 3
+standard_devation_humidity = 8
 standard_devation_air = 50
 mean_temperature = 30
 mean_humidity = 30

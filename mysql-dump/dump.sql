@@ -34,12 +34,12 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`internal_temperatures`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`internal_temperatures` (
+CREATE TABLE IF NOT EXISTS `mydb`.`log_storage` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `date` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `temperature` DECIMAL(3,1) NULL,
-  `humidity` TINYINT UNSIGNED ,
-  `room` VARCHAR(10) NULL,
+  `type` ENUM('fire', 'temperature', 'humidity', 'air'),
+  `description` VARCHAR(255),
+  `room` INT UNSIGNED,
   PRIMARY KEY (`ID`))
 ENGINE = InnoDB;
 
