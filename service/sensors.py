@@ -19,9 +19,9 @@ mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
 mqtt_client.connect(client_address, port=port)
 
 #define variables
-standard_devation_temperature = 3
-standard_devation_humidity = 8
-standard_devation_air = 50
+standard_devation_temperature = 0.5
+standard_devation_humidity = 2
+standard_devation_air = 20
 mean_temperature = 30
 mean_humidity = 30
 mean_air = 700
@@ -40,7 +40,7 @@ def publish_area_data(mqtt_client, sensors, room):
             elif sensor == 'air_quality':
                 data = int(random.gauss(mean_air,standard_devation_air))
             elif sensor == 'smoke':
-                if(random.random() > 0.01):
+                if(random.random() > 0.001):
                     data = 0
                 else:
                     data = 1
