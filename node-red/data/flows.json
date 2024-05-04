@@ -228,7 +228,7 @@
         "type": "function",
         "z": "96e55a8f4e272af3",
         "name": "temperature-alert",
-        "func": "if(msg.payload.temperature > 100){\n    var parts = msg.topic.split(\"/\");\n    msg.payload.room = parts[1].slice(5);\n    msg.payload.type = 1;\n    msg.payload.description = \"Temperatura troppo alta\"\n    return msg;\n}\n",
+        "func": "if(msg.payload.temperature > 100){\n    var parts = msg.topic.split(\"/\");\n    msg.payload.room = parts[1].slice(5);\n    msg.payload.type = 2;\n    msg.payload.description = \"Temperatura troppo alta\"\n    return msg;\n}else if(msg.payload.temperature < 0){\n    var parts = msg.topic.split(\"/\");\n    msg.payload.room = parts[1].slice(5);\n    msg.payload.type = 2;\n    msg.payload.description = \"Temperatura troppo bassa\"\n    return msg;\n}\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -250,7 +250,7 @@
         "type": "function",
         "z": "96e55a8f4e272af3",
         "name": "humidity-alert",
-        "func": "if(msg.payload.humidity > 100){\n    var parts = msg.topic.split(\"/\");\n    msg.payload.room = parts[1].slice(4);\n    msg.payload.type = 1;\n    msg.payload.description = \"Temperatura troppo alta\"\n    return msg;\n}\n",
+        "func": "if(msg.payload.humidity > 100){\n    var parts = msg.topic.split(\"/\");\n    msg.payload.room = parts[1].slice(4);\n    msg.payload.type = 3;\n    msg.payload.description = \"Umidità troppo alta\"\n    return msg;\n} else if (msg.payload.humidity < 0){\n    var parts = msg.topic.split(\"/\");\n    msg.payload.room = parts[1].slice(4);\n    msg.payload.type = 3;\n    msg.payload.description = \"Umidità troppo bassa\"\n    return msg;\n}\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -271,7 +271,7 @@
         "type": "function",
         "z": "96e55a8f4e272af3",
         "name": "airquality-alert",
-        "func": "if(msg.payload.air_quality < 0){\n  var parts = msg.topic.split(\"/\");\n  msg.payload.room = parts[1].slice(4);\n  msg.payload.type = 1;\n  msg.payload.description = \"Temperatura troppo alta\"\n  return msg;  \n}\n",
+        "func": "if(msg.payload.air_quality < 0){\n  var parts = msg.topic.split(\"/\");\n  msg.payload.room = parts[1].slice(4);\n  msg.payload.type = 4;\n  msg.payload.description = \"Qualità dell'aria bassa\"\n  return msg;  \n}\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -284,31 +284,6 @@
             [
                 "3f46a381194d213c",
                 "116ae71bba52f9f6"
-            ]
-        ]
-    },
-    {
-        "id": "106008f03f7f899a",
-        "type": "trigger",
-        "z": "96e55a8f4e272af3",
-        "name": "",
-        "op1": "Allarme incendio",
-        "op2": "0",
-        "op1type": "str",
-        "op2type": "str",
-        "duration": "0",
-        "extend": false,
-        "overrideDelay": false,
-        "units": "ms",
-        "reset": "1",
-        "bytopic": "all",
-        "topic": "topic",
-        "outputs": 1,
-        "x": 600,
-        "y": 680,
-        "wires": [
-            [
-                "6c3a13b5d8191a15"
             ]
         ]
     },
@@ -403,7 +378,9 @@
         "x": 950,
         "y": 680,
         "wires": [
-            []
+            [
+                "4bd0ae30306399d4"
+            ]
         ]
     },
     {
@@ -426,7 +403,7 @@
                 "cc5a18f1f44388ac",
                 "11a14ccbece2125d",
                 "3b7ceacd7102e0c6",
-                "106008f03f7f899a"
+                "396264355ff425a6"
             ]
         ]
     },
@@ -447,7 +424,7 @@
         "removeregexcommand": false,
         "outputs": 2,
         "x": 330,
-        "y": 1020,
+        "y": 1080,
         "wires": [
             [
                 "a24b87d1168a0124"
@@ -467,8 +444,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 700,
-        "y": 1020,
+        "x": 660,
+        "y": 1080,
         "wires": [
             [
                 "be740a2eee8a768d"
@@ -488,7 +465,7 @@
         "finalize": "",
         "libs": [],
         "x": 660,
-        "y": 1220,
+        "y": 1160,
         "wires": [
             [
                 "963fc9bba5323539"
@@ -503,8 +480,8 @@
         "bot": "516a4340f4b51307",
         "haserroroutput": false,
         "outputs": 1,
-        "x": 1110,
-        "y": 1020,
+        "x": 990,
+        "y": 1080,
         "wires": [
             []
         ]
@@ -518,7 +495,7 @@
         "event": "callback_query",
         "autoanswer": false,
         "x": 340,
-        "y": 1220,
+        "y": 1160,
         "wires": [
             [
                 "249b0b3f64a136cb"
@@ -537,8 +514,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1260,
-        "y": 1220,
+        "x": 1220,
+        "y": 1160,
         "wires": [
             [
                 "22ef5763a1475cbe"
@@ -553,8 +530,8 @@
         "bot": "516a4340f4b51307",
         "haserroroutput": false,
         "outputs": 1,
-        "x": 1630,
-        "y": 1140,
+        "x": 1510,
+        "y": 1160,
         "wires": [
             []
         ]
@@ -586,8 +563,8 @@
         "precision": "",
         "retentionPolicy": "",
         "org": "${INFLUX_ORG}",
-        "x": 950,
-        "y": 1220,
+        "x": 970,
+        "y": 1160,
         "wires": [
             [
                 "c7102c16cce6831f"
@@ -660,6 +637,27 @@
         "x": 1640,
         "y": 780,
         "wires": []
+    },
+    {
+        "id": "396264355ff425a6",
+        "type": "function",
+        "z": "96e55a8f4e272af3",
+        "name": "smoke-alert",
+        "func": "if(msg.payload.smoke == 1){\n    var parts = msg.topic.split(\"/\");\n    msg.payload.room = parts[1].slice(4);\n    msg.payload.type = 1;\n    msg.payload.description = \"Rilevato fumo\"\n    return msg;\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 680,
+        "wires": [
+            [
+                "116ae71bba52f9f6",
+                "6c3a13b5d8191a15"
+            ]
+        ]
     },
     {
         "id": "bd9695c0525b6b70",
@@ -892,8 +890,8 @@
         "title": "Temperatura Media Stanze",
         "label": "celsius",
         "format": "{{value}} c°",
-        "min": "15",
-        "max": "30",
+        "min": "10",
+        "max": "50",
         "colors": [
             "#ca3838",
             "#00b500",
@@ -903,7 +901,7 @@
         "seg2": "22",
         "diff": false,
         "className": "",
-        "x": 980,
+        "x": 1140,
         "y": 380,
         "wires": [],
         "inputLabels": [
@@ -951,7 +949,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 590,
+        "x": 810,
         "y": 380,
         "wires": [
             [
@@ -983,7 +981,7 @@
         "seg2": "60",
         "diff": false,
         "className": "",
-        "x": 980,
+        "x": 1140,
         "y": 460,
         "wires": [],
         "inputLabels": [
@@ -1017,8 +1015,8 @@
         "group": "aec5af2c2cd18fa4",
         "name": "",
         "order": 1,
-        "width": 0,
-        "height": 0,
+        "width": "13",
+        "height": "3",
         "format": "<div class=temperature-block\">\n    <img src=\"{{msg.payload.icon}}\" alt=\"meteo\">\n    <p><b>Tempo: </b> {{msg.payload.text}} </p>\n</div>\n",
         "storeOutMessages": true,
         "fwdInMessages": true,
@@ -1058,7 +1056,8 @@
         "y": 720,
         "wires": [
             [
-                "084de9fab81673ee"
+                "084de9fab81673ee",
+                "1b5d8a410e0535b3"
             ]
         ]
     },
@@ -1073,7 +1072,7 @@
         "precision": "",
         "retentionPolicy": "",
         "org": "${INFLUX_ORG}",
-        "x": 350,
+        "x": 570,
         "y": 380,
         "wires": [
             [
@@ -1092,7 +1091,7 @@
         "precision": "",
         "retentionPolicy": "",
         "org": "${INFLUX_ORG}",
-        "x": 350,
+        "x": 570,
         "y": 460,
         "wires": [
             [
@@ -1121,7 +1120,7 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 130,
+        "x": 250,
         "y": 420,
         "wires": [
             [
@@ -1142,12 +1141,102 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 590,
+        "x": 810,
         "y": 460,
         "wires": [
             [
                 "928dd37bd92ec803"
             ]
         ]
+    },
+    {
+        "id": "a3ce42a3ea0e5663",
+        "type": "ui_list",
+        "z": "9277445b8b04291e",
+        "group": "aec5af2c2cd18fa4",
+        "name": "",
+        "order": 5,
+        "width": "13",
+        "height": "5",
+        "lineType": "three",
+        "actionType": "none",
+        "allowHTML": true,
+        "outputs": 0,
+        "topic": "",
+        "x": 1250,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "1b5d8a410e0535b3",
+        "type": "function",
+        "z": "9277445b8b04291e",
+        "name": "function 2",
+        "func": "var query = \"SELECT * FROM log_storage ORDER BY date DESC LIMIT 20\";\nmsg.topic = query\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 860,
+        "wires": [
+            [
+                "98a8397ed25147b7"
+            ]
+        ]
+    },
+    {
+        "id": "98a8397ed25147b7",
+        "type": "mysql",
+        "z": "9277445b8b04291e",
+        "mydb": "6a407f545c7dab10",
+        "name": "",
+        "x": 690,
+        "y": 860,
+        "wires": [
+            [
+                "9511987beefad08b",
+                "cd707ffccde9bd0f"
+            ]
+        ]
+    },
+    {
+        "id": "9511987beefad08b",
+        "type": "function",
+        "z": "9277445b8b04291e",
+        "name": "list-set",
+        "func": "var list = [];\n\nmsg.payload.forEach(function (element) {\n    let des = new Date(element.date).toDateString().substring(0, 20);\n    let icon = ''; // Definisci icon al di fuori dei blocchi if\n\n    if (String(element.type) == \"fire\") {\n        icon = \"https://cdn-icons-png.flaticon.com/256/483/483675.png\";\n    } else if (element.type == \"temperature\") {\n        icon = \"https://images.emojiterra.com/google/noto-emoji/unicode-15/bw/1024px/1f321.png\";\n    } else if (element.type == \"humidity\") {\n        icon = \"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ0yadp9UxpuiAlDnUFoUaNV4oTZvFGaJUKZkJKBoEyQ&s\";\n    }else{\n        icon = \"https://cdn-icons-png.flaticon.com/512/2451/2451378.png\"\n    }\n\n    var item = {\n        title: element.description,\n        description: des,\n        icon: icon\n    };\n    list.push(item);\n});\n\nmsg.payload = list;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 860,
+        "wires": [
+            [
+                "a3ce42a3ea0e5663"
+            ]
+        ]
+    },
+    {
+        "id": "cd707ffccde9bd0f",
+        "type": "debug",
+        "z": "9277445b8b04291e",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 940,
+        "wires": []
     }
 ]
