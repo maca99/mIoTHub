@@ -19,8 +19,14 @@ This project is designed to be a personal home automation software with the focu
 **Eclipse Mosquitto**
 [link](https://mosquitto.org/)
 
-**Zigbee2MQTT:** 
-[link](https://www.zigbee2mqtt.io/)
+**Grafana:** 
+[link](https://www.grafana.com/)
+
+**Influxdb:** 
+[link](https://www.influxdata.com/)
+
+**Telegram:** 
+[link](https://www.telegram.org/)
 
 **Weather api**
 [link](https://www.weatherapi.com/)
